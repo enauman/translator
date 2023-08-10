@@ -1,7 +1,10 @@
 import RPi.GPIO as GPIO
 import time
 import threading
-from chars import letter_bitmaps_es, letters_es, letter_bitmaps_ru, letters_ru, letter_bitmaps_uz, letters_uz, letter_bitmaps_bn, letters_bn
+from chars_bn import letter_bitmaps_bn, letters_bn
+from chars_es import letter_bitmaps_es, letters_es
+from chars_ru import letter_bitmaps_ru, letters_ru
+from chars_uz import letter_bitmaps_uz, letters_uz
 from color_selector import Color_Selector
 from voice_service import Voice_Service
 vs = Voice_Service(True)
