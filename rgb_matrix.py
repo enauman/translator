@@ -1,12 +1,12 @@
 import RPi.GPIO as GPIO
 import time
-import threading
 from chars_bn import letter_bitmaps_bn, letters_bn
 from chars_es import letter_bitmaps_es, letters_es
 from chars_ru import letter_bitmaps_ru, letters_ru
 from chars_uz import letter_bitmaps_uz, letters_uz
 from color_selector import Color_Selector
 from voice_service import Voice_Service
+from uniseg import graphemecluster
 vs = Voice_Service(True)
 cs = Color_Selector()
 GPIO.setmode(GPIO.BCM)
@@ -217,6 +217,7 @@ class RGB_MATRIX:
 		except IOError:
 			print("Error: write print inaccessible")
 
+		message_glyphs = list(graphemecluster.grapheme_clusters(message))
 		grid_width = self.FONT_W * len(message)
 		margins = 0
 		margins_list = []
@@ -238,24 +239,39 @@ class RGB_MATRIX:
 			letters = letters_bn
 			font_margins = self.font_margins_bn
 			self.FONT_W = 16
-		for char in message:
+		for glyph in message_glyphs:
+			found = False
 			for key in letters:
-				if char == letters[key]:
+				if glyph == letters[key]:
 					margins += font_margins[key]
 					margins_list.append(font_margins[key])
+					found = True
 					break
+			if not found:
+				print("missing",glyph)
+				try:
+					with open("missing.txt", 'a') as af:
+						af.write(glyph)
+						af.write("\n")
+				except IOError as e:
+					print(e)
 		message_width = grid_width - margins
-		if len(message) > 0:
+		#temporary margin fix
+		offset = len(message_glyphs) - len(margins_list)
+		for i in range(len(margins_list),len(margins_list)+offset):
+			margins_list.append(0)
+		if len(message_glyphs) > 0:
 			while xpos >= -message_width - self.FONT_W:
 				self.clear()
 				x = xpos
 				index = 0
-				for char in message:
-					self.show_letter(x, char, color, language)
+				for glyph in message_glyphs:
+					self.show_letter(x, glyph, color, language)
 					if language == "bn":
-						x += self.FONT_W - margins_list[index] * 2
+						x += self.FONT_W - (margins_list[index] * 2) + 1
 					else:
 						x += self.FONT_W - margins_list[index]
+					index += 1 
 				if time.time() > self.start + self.elapse:
 					xpos -= 1
 					self.start = time.time()
@@ -265,6 +281,7 @@ class RGB_MATRIX:
 
 	def scroll_text_test(self,color,language,message):
 		self.scrolling = True
+		message_glyphs = list(graphemecluster.grapheme_clusters(message))
 		xpos = self.MATRIX_W
 		grid_width = self.FONT_W * len(message)
 		margins = 0
@@ -287,21 +304,35 @@ class RGB_MATRIX:
 			letters = letters_bn
 			font_margins = self.font_margins_bn
 			self.FONT_W = 16
-		for char in message:
+		for glyph in message_glyphs:
+			found = False
 			for key in letters:
-				if char == letters[key]:
+				if glyph == letters[key]:
 					margins += font_margins[key]
 					margins_list.append(font_margins[key])
+					found = True
 					break
+			if not found:
+				print("missing",glyph)
+				try:
+					with open("missing.txt", 'a') as af:
+						af.write(glyph)
+						af.write("\n")
+				except IOError as e:
+					print(e)
 		message_width = grid_width - margins
+		#temporary margin fix
+		offset = len(message_glyphs) - len(margins_list)
+		for i in range(len(margins_list),len(margins_list)+offset):
+			margins_list.append(0)
 		while xpos >= -message_width - self.FONT_W:
 			self.clear()
 			x = xpos
 			index = 0
-			for char in message:
-				self.show_letter(x, char, color, language)
+			for glyph in message_glyphs:
+				self.show_letter(x, glyph, color, language)
 				if language == "bn":
-					x += self.FONT_W - margins_list[index] * 2
+					x += self.FONT_W - (margins_list[index] * 2) + 1
 				else:
 					x += self.FONT_W - margins_list[index]
 				index += 1
