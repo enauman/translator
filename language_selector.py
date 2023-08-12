@@ -13,33 +13,17 @@ class Language_Selector:
 		GPIO.setup(self.pole2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 		GPIO.setup(self.pole3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 		self.language = "es"
-		self.language_init()
-
-	def language_init(self):
-		if GPIO.input(self.pole0):
-			self.language = "es"
-		elif GPIO.input(self.pole1):
-			self.language = "ru"
-		elif GPIO.input(self.pole2):
-			self.language = "uz"
-		elif GPIO.input(self.pole3):
-			self.language = "bn"
+		self.set_language()
 
 	def get_language(self):
 		return self.language
 
-	def set_language(self, which_pole):
-		if which_pole == 0:
+	def set_language(self):
+		if GPIO.input(self.pole0) == GPIO.HIGH:
 			self.language = "es"
-		elif which_pole == 1:
+		elif GPIO.input(self.pole1) == GPIO.HIGH:
 			self.language = "ru"
-		elif which_pole == 2:
+		elif GPIO.input(self.pole2) == GPIO.HIGH:
 			self.language = "uz"
-		elif which_pole == 3:
+		elif GPIO.input(self.pole3) == GPIO.HIGH:
 			self.language = "bn"
-
-	def event_detect(self):
-		GPIO.add_event_detect(self.pole0,GPIO.RISING,callback=lambda x: self.set_language(0))
-		GPIO.add_event_detect(self.pole1,GPIO.RISING,callback=lambda x: self.set_language(1))
-		GPIO.add_event_detect(self.pole2,GPIO.RISING,callback=lambda x: self.set_language(2))
-		GPIO.add_event_detect(self.pole3,GPIO.RISING,callback=lambda x: self.set_language(3))
