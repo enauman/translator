@@ -29,13 +29,14 @@ def clean_logs():
 	with open('missing.txt', 'w') as wf:
 		wf.write("")
 
-def scroll_text(name, color):
+def scroll_text(name,color):
 	global scrolling
 	scrolling = True
 	language = ""
 	message = ""
 	rgb_color = ""
 	font_path = ""
+	speed = "5"
 	temp_text= []
 	try:
 		with open('print.txt', 'r') as rf:
@@ -73,15 +74,16 @@ def scroll_text(name, color):
 		font_path = "/home/translator/app/rpi-rgb-led-matrix/fonts/Arimo.bdf"
 	elif language == "uz":
 		font_path = "/home/translator/app/rpi-rgb-led-matrix/fonts/9x15.bdf"
+		speed = "8"
 	elif language == "bn":
 		font_path = "/home/translator/app/rpi-rgb-led-matrix/fonts/Bengali.bdf"
 
 	function_call_path = "/home/translator/app/rpi-rgb-led-matrix/examples-api-use/scrolling-text-example"
 	if not font_path == "" and not message == "":
-		system_call = "sudo " + function_call_path + " --led-rows=16 --led-chain=3 --led-slowdown-gpio=2 -l 1 -s 5 -f " + font_path + " -C " + rgb_color + " " + message
-		print("start scrolling " + message)
+		system_call = "sudo " + function_call_path + " --led-rows=16 --led-chain=3 --led-slowdown-gpio=2 -l 1 -s " + speed + " -f " + font_path + " -C " + rgb_color + " " + message
+		# print("start scrolling " + message)
 		os.system(system_call)
-		print("end scroll")
+		# print("end scroll")
 	scrolling = False
 
 if __name__ == "__main__":
