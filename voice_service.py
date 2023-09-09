@@ -1,5 +1,6 @@
 import os
 import speech_recognition as sr
+import threading
 from language_selector import Language_Selector
 ls = Language_Selector()
 r = sr.Recognizer()
@@ -8,7 +9,6 @@ r.energy_threshold = 4000
 r.dynamic_energy_threshold = True
 #r.operation_timeout = 2.0
 mic = sr.Microphone(device_index=0)
-#mic = sr.Microphone()
 class Voice_Service:
 	def __init__(self,running):
 		self.index = 0
@@ -27,15 +27,17 @@ class Voice_Service:
 			with mic as source:
 				r.adjust_for_ambient_noise(source, duration = 0.5)
 				self.audio = r.listen(source, timeout = 1.0)
-			self.transcribe(language)
+			translate = threading.Thread(target=self.transcribe, args=(1,language), daemon=True)
+			translate.start()
+			# self.transcribe(language)
 		except sr.WaitTimeoutError as e:
 			print(e)
 		self.listening = False
 
-	def transcribe(self,language):
+	def transcribe(self,name,language):
 		text = "..."
 		try:
-#			text = r.recognize_google_cloud(self.audio, credentials_json="./application_default_credentials.json")
+#			text = r.recognize_google_cloud(self.audio, credentials_json="/home/translator/app/application_default_credentials.json")
 			text = r.recognize_google(self.audio)
 			if text == "shut down":
 				self.running = False
@@ -46,8 +48,9 @@ class Voice_Service:
 		if text != "could not recognize":
 			self.transcription.append(text)
 			try:
-				with open('transcribe.txt', 'w') as wf:
-					wf.writelines(self.transcription)
+				with open('translated.txt', 'a') as af:
+					af.writelines(self.transcription[self.index])
+					af.write("\n")
 				self.line_to_buffer(language)
 			except IOError as e:
 				print(e)
@@ -84,7 +87,7 @@ class Voice_Service:
 		try:
 			with open('print.txt', 'a') as af:
 				af.write(language)
-				af.write("\n")
+				af.write('\n')
 				af.writelines(lines)
 		except IOError as e:
 			print(e)
