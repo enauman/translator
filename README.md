@@ -21,6 +21,7 @@
   <li><a href="https://oshwlab.com/enauman/rgb-panel">Easy EDA project with 2 pcb designs.</a> Single-sided pcb is to attach 10mm rgb led and 12mm button for showing and choosing color of display. 2-sided pcb is to attach 16-pin ribbon cable from matrix display to 40-pin ribbon cable going to Raspberry Pi, as well as connecting rgb led + button, latching control button to start/stop voice/translation service, and 4-pole slide switch for selecting each of 4 languages.</li>
 </ul>
 <h4>Software, Dependencies</h4>
+<ul>
 <li>Raspberry Pi OS Lite (64-bit)</li>
 <li>Create project directory on Pi and add files from this git project.</li>
 <li><a href="https://pypi.org/project/SpeechRecognition/">Speech Recognition</a> library with dependencies in documentation</li>
@@ -32,7 +33,7 @@
 <li><a href="https://learn.sparkfun.com/tutorials/how-to-run-a-raspberry-pi-program-on-startup#method-3-systemd">Autorun program on startup</a>. I used systemcd approach with the following in my Unit File:<br />
   <pre>
     <code>
-      [Unit]
+[Unit]
 Description=Run translation service
 After=multi-user.target
 
@@ -47,4 +48,5 @@ WantedBy=multi-user.target
   </pre>
   </li>
   <li>Because of autorun, root needs access to program files so file names are written with full path included. Also files need rwx permissions added for "all". That's the only way I could get everything to work from autorun.</li>
+  </ul>
 
