@@ -28,7 +28,9 @@
 <li><a href="https://pypi.org/project/SpeechRecognition/">Speech Recognition</a> library with dependencies in documentation</li>
 <li><a href="https://lindevs.com/install-translate-shell-on-raspberry-pi/">Translate-shell</a>, I think this is what I followed to get it on Raspberry Pi</li>
 <li><a href="https://github.com/hzeller/rpi-rgb-led-matrix/tree/master">hzeller rpi-rgb-led-matrix library</a>, build and put in same folder as application</li>
+</ul>
 <h4>Tips and Configurations</h4>
+<ul>
 <li>If using non-Latin language characters, create bdf font files by downloading and converting them with <a href="https://learn.adafruit.com/custom-fonts-for-pyportal-circuitpython-display/use-otf2bdf">otf2bdf</a> on Linux (easiest), put the bdf file in the rpi-rgb-led-matrix library font folder.</li>
 <li><a href="https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/updating-alsa-config">Tip for configuring USB mic</a> to work as default recording device.</li>
 <li><a href="https://learn.sparkfun.com/tutorials/how-to-run-a-raspberry-pi-program-on-startup#method-3-systemd">Autorun program on startup</a>. I used systemcd approach with the following in my Unit File:<br />
