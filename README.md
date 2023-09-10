@@ -22,8 +22,9 @@
 </ul>
 <h4>Software, Dependencies</h4>
 <ul>
-<li>Raspberry Pi OS Lite (64-bit)</li>
-<li>Create project directory on Pi and add files from this git project.</li>
+<li>Raspberry Pi OS Lite (64-bit), translate-shell errors on 32-bit</li>
+<li>Raspberry Pi account name I used is "translator" and is hard coded in program files main.py and voice_service.py (see file path below)</li>
+<li>Create project directory named "app" on Pi and add files from this git project.</li>
 <li><a href="https://pypi.org/project/SpeechRecognition/">Speech Recognition</a> library with dependencies in documentation</li>
 <li><a href="https://lindevs.com/install-translate-shell-on-raspberry-pi/">Translate-shell</a>, I think this is what I followed to get it on Raspberry Pi</li>
 <li><a href="https://github.com/hzeller/rpi-rgb-led-matrix/tree/master">hzeller rpi-rgb-led-matrix library</a>, build and put in same folder as application</li>
