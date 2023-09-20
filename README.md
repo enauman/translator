@@ -1,6 +1,14 @@
 # translator
 <img src="20230910_131031.GIF" width="600">
 <h3>Transcribes speech to text then translates to 4 different languages for 3 daisy-chained 16x32 rgb matrix displays</h3>
+<ul>
+  <li>USB mic captures speech, Speech Recognition library transcribes with Google speech-to-text</li>
+  <li>Translate-shell translates transcribed text with Google translate</li>
+  <li>Hzeller rpi-rgb-led-matrix library scrolls translation across 3-panel matrix</li>
+  <li>4-pole slide switch sets target language, Spanish, Russian, Uzbek, or Bangla</li>
+  <li>latching switch controls voice service so user can pause translation</li>
+  <li>pressing tactile button can purge buffered text to scroll in case user wants to skip backlog</li>
+</ul>
 <h4>BOM</h4>
 <ul>
   <li><a href="https://www.adafruit.com/product/420">3 x Medium 16x32 RGB LED matrix panel - 6mm Pitch</a>. Each comes with 16-pin ribbon cable and power cables (matrix is powered separate from Raspberry Pi) but not a power adapter. </li>
