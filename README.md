@@ -5,7 +5,7 @@
   <li>USB mic captures speech, Speech Recognition library transcribes with Google speech-to-text</li>
   <li>Translate-shell translates transcribed text with Google translate</li>
   <li>Hzeller rpi-rgb-led-matrix library scrolls translation across 3-panel matrix</li>
-  <li>4-pole slide switch sets target language, Spanish, Russian, Uzbek, or Bangla</li>
+  <li>4-pole slide switch sets target language; Spanish, Russian, Uzbek, or Bangla</li>
   <li>latching switch controls voice service so user can pause translation</li>
   <li>pressing tactile button can purge buffered text to scroll in case user wants to skip backlog</li>
 </ul>
