@@ -1,12 +1,25 @@
-Hola
-adiós
-hoy es lunes mañana será martes
-cambiar el idioma a ruso creo
-No
-el idioma
-aún no
-ups
-Qué lenguaje es este
-bien, entonces esto no está funcionando en absoluto
-eso será algo para averiguar para mí
-cerrar
+what language do you speak
+Qaysi tilda gaplashasiz
+oh that's much better
+oh, bu ancha yaxshi
+play Bangla
+বাংলা খেলা
+play I like that
+খেলো আমার ভালো লাগে
+now try Russian
+теперь попробуй русский
+and finally Spanish
+и, наконец, испанский
+can you speak Spanish
+puedes hablar español
+that's fantastic
+eso es fantástico
+I think it's doing a very good job now try doing some Russian now let's do some Uzbek
+Creo que está haciendo un muy buen trabajo. Ahora intenta hablar algo de ruso. Ahora hagamos algo de uzbeko.
+switch it to Bangla
+এটিকে বাংলায় পরিবর্তন করুন
+what do you think now
+আপনি এখন কি চিন্তা করছেন
+now you are listening
+এখন আপনি শুনছেন
+shut down
