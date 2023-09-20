@@ -106,7 +106,7 @@ def scroll_text(name):
 		system_call = "sudo " + function_call_path + " --led-rows=16 --led-chain=3 --led-slowdown-gpio=2 -l 1 -s " + speed + " -f " + font_path + " -C " + rgb_color + " " + message
 		os.system(system_call)
 	scrolling = False
-
+# checks internet connection before main loop
 def is_cnx_active(timeout):
     try:
         requests.head("http://www.google.com/", timeout=timeout)
